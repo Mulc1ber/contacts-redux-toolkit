@@ -1,10 +1,10 @@
 import React, {memo, useEffect, useState} from 'react';
-import {CommonPageProps} from './types';
+import {FavoritListPageProps} from './types';
 import {Col, Row} from 'react-bootstrap';
 import {ContactCard} from 'src/components/ContactCard';
 import {ContactDto} from 'src/types/dto/ContactDto';
 
-export const FavoritListPage = memo<CommonPageProps>(({
+export const FavoritListPage = memo<FavoritListPageProps>(({
   favoriteContactsState,
   contactsState
 }) => {

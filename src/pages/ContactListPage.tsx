@@ -1,12 +1,12 @@
 import React, {memo, useState} from 'react';
-import {CommonPageProps} from './types';
+import {ContactAndGroupPageProps} from './types';
 import {Col, Row} from 'react-bootstrap';
 import {ContactCard} from 'src/components/ContactCard';
 import {FilterForm, FilterFormValues} from 'src/components/FilterForm';
 import {ContactDto} from 'src/types/dto/ContactDto';
 
 
-export const ContactListPage = memo<CommonPageProps>(({
+export const ContactListPage = memo<ContactAndGroupPageProps>(({
   contactsState, groupContactsState
 }) => {
   const [contacts, setContacts] = useState<ContactDto[]>(contactsState[0])

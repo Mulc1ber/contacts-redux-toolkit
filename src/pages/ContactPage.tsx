@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {CommonPageProps} from './types';
+import {ContactPageProps} from './types';
 import {Col, Row} from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
 import {ContactDto} from 'src/types/dto/ContactDto';
@@ -7,7 +7,7 @@ import {ContactCard} from 'src/components/ContactCard';
 import {Empty} from 'src/components/Empty';
 
 
-export const ContactPage: FC<CommonPageProps> = ({
+export const ContactPage: FC<ContactPageProps> = ({
   contactsState
 }) => {
   const {contactId} = useParams<{ contactId: string }>();

@@ -1,5 +1,5 @@
 import React, {memo, useEffect, useState} from 'react';
-import {CommonPageProps} from './types';
+import {ContactAndGroupPageProps} from './types';
 import {Col, Row} from 'react-bootstrap';
 import {useParams} from 'react-router-dom';
 import {ContactDto} from 'src/types/dto/ContactDto';
@@ -8,7 +8,7 @@ import {GroupContactsCard} from 'src/components/GroupContactsCard';
 import {Empty} from 'src/components/Empty';
 import {ContactCard} from 'src/components/ContactCard';
 
-export const GroupPage = memo<CommonPageProps>(({
+export const GroupPage = memo<ContactAndGroupPageProps>(({
   contactsState,
   groupContactsState
 }) => {
