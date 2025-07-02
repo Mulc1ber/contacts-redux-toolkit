@@ -1,6 +1,11 @@
 import { memo, useLayoutEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { ContactCard, FilterForm, FilterFormValues } from "src/components";
+import {
+  ContactCard,
+  FilterForm,
+  FilterFormValues,
+  Loader,
+} from "src/components";
 import { ContactDto } from "src/types/dto/ContactDto";
 import { useAppSelector } from "src/hooks";
 
@@ -45,7 +50,7 @@ export const ContactListPage = memo(() => {
       </Col>
       <Col>
         {loading ? (
-          <div>Загрузка...</div>
+          <Loader />
         ) : (
           <>
             <Row xxl={4} className="g-4">

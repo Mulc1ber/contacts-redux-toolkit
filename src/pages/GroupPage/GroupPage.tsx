@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { ContactCard, Empty, GroupContactsCard } from "src/components";
+import { ContactCard, Empty, GroupContactsCard, Loader } from "src/components";
 
 import { useAppSelector } from "src/hooks";
 
@@ -20,7 +20,7 @@ export const GroupPage = memo(() => {
   return (
     <Row className="g-4">
       {loading ? (
-        <div>Загрузка...</div>
+        <Loader />
       ) : (
         <>
           {currentGroup ? (

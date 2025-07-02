@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Col, Row } from "react-bootstrap";
-import { ContactCard } from "src/components";
+import { ContactCard, Loader } from "src/components";
 import { useAppSelector } from "src/hooks";
 
 export const FavoritListPage = memo(() => {
@@ -15,7 +15,7 @@ export const FavoritListPage = memo(() => {
   return (
     <Row xxl={4} className="g-4">
       {loading ? (
-        <div>Загрузка...</div>
+        <Loader />
       ) : (
         <>
           {favoriteContacts.map((contact) => (

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { ContactCard, Empty } from "src/components";
+import { ContactCard, Empty, Loader } from "src/components";
 import { useAppSelector } from "src/hooks";
 
 export const ContactPage: FC = () => {
@@ -13,7 +13,7 @@ export const ContactPage: FC = () => {
   return (
     <Row xxl={3}>
       {loading ? (
-        <div>Загрузка...</div>
+        <Loader />
       ) : (
         <>
           <Col className={"mx-auto"}>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { MainLayout } from "src/layout";
-import { ContactListPage, FavoritListPage } from "src/pages";
+import { ContactListPage, FavoritListPage, NotFound } from "src/pages";
 import { ContactRouter } from "../ContactRouter/ContactRouter";
 import { GroupRouter } from "../GroupRouter/GroupRouter";
 import { useAppDispatch } from "src/hooks";
@@ -23,7 +23,7 @@ export const AppRouter = () => {
         <Route path="/contact/*" element={<ContactRouter />} />
         <Route path="/groups/*" element={<GroupRouter />} />
         <Route path="/favorit" element={<FavoritListPage />} />
-        <Route path="*" element={<div>NotFound</div>} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
