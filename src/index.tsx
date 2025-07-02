@@ -5,6 +5,8 @@ import { MainApp } from "./apps/MainApp";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "react-bootstrap";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,9 +17,11 @@ root.render(
       breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
       minBreakpoint="xxs"
     >
-      <BrowserRouter>
-        <MainApp />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <MainApp />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
