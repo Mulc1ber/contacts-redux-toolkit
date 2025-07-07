@@ -2,15 +2,14 @@ import React, { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { ContactCard, Empty, GroupContactsCard, Loader } from "src/components";
-
-import { useAppSelector } from "src/hooks";
+import { useGetContactsQuery, useGetGroupsQuery } from "src/redux/contacts";
 
 export const GroupPage = memo(() => {
   const { groupId } = useParams<{ groupId: string }>();
 
-  const { contacts, groups, loading } = useAppSelector(
-    (state) => state.contacts
-  );
+  const { data: contacts = [], isLoading: contactsLoading } =
+    useGetContactsQuery();
+  const { data: groups = [], isLoading: groupsLoading } = useGetGroupsQuery();
 
   const currentGroup = groups.find(({ id }) => id === groupId);
   const groupContactsList = currentGroup
@@ -19,7 +18,7 @@ export const GroupPage = memo(() => {
 
   return (
     <Row className="g-4">
-      {loading ? (
+      {contactsLoading || groupsLoading ? (
         <Loader />
       ) : (
         <>

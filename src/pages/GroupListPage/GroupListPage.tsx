@@ -1,15 +1,14 @@
 import { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { GroupContactsCard, Loader } from "src/components";
-
-import { useAppSelector } from "src/hooks";
+import { useGetGroupsQuery } from "src/redux/contacts";
 
 export const GroupListPage = memo(() => {
-  const { groups, loading } = useAppSelector((state) => state.contacts);
+  const { data: groups = [], isLoading: groupsLoading } = useGetGroupsQuery();
 
   return (
     <Row xxl={4}>
-      {loading ? (
+      {groupsLoading ? (
         <Loader />
       ) : (
         <>

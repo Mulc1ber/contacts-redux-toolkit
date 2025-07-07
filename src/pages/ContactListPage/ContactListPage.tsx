@@ -1,4 +1,4 @@
-import { memo, useLayoutEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import {
   ContactCard,
@@ -7,14 +7,14 @@ import {
   Loader,
 } from "src/components";
 import { ContactDto } from "src/types/dto/ContactDto";
-import { useAppSelector } from "src/hooks";
+import { useGetContactsQuery, useGetGroupsQuery } from "src/redux/contacts";
 
 export const ContactListPage = memo(() => {
-  const { contacts, groups, loading } = useAppSelector(
-    (state) => state.contacts
-  );
-  const [filteredContacts, setFilteredContacts] =
-    useState<ContactDto[]>(contacts);
+  const { data: contacts = [], isLoading: contactsLoading } =
+    useGetContactsQuery();
+  const { data: groups = [], isLoading: groupsLoading } = useGetGroupsQuery();
+
+  const [filteredContacts, setFilteredContacts] = useState<ContactDto[]>([]);
 
   const onSubmit = (fv: Partial<FilterFormValues>) => {
     let findContacts = [...contacts];
@@ -39,8 +39,15 @@ export const ContactListPage = memo(() => {
     setFilteredContacts(findContacts);
   };
 
-  useLayoutEffect(() => {
-    setFilteredContacts(contacts);
+  useEffect(() => {
+    console.log("filteredContacts", filteredContacts);
+    console.log("contacts", contacts);
+
+    console.log(filteredContacts.length === 0);
+
+    if (filteredContacts.length === 0 && contacts.length > 0) {
+      setFilteredContacts(contacts);
+    }
   }, [contacts]);
 
   return (
@@ -49,16 +56,17 @@ export const ContactListPage = memo(() => {
         <FilterForm initialValues={{}} onSubmit={onSubmit} />
       </Col>
       <Col>
-        {loading ? (
+        {contactsLoading || groupsLoading ? (
           <Loader />
         ) : (
           <>
             <Row xxl={4} className="g-4">
-              {filteredContacts.map((contact) => (
-                <Col key={contact.id}>
-                  <ContactCard contact={contact} withLink />
-                </Col>
-              ))}
+              {filteredContacts.length > 0 &&
+                filteredContacts.map((contact) => (
+                  <Col key={contact.id}>
+                    <ContactCard contact={contact} withLink />
+                  </Col>
+                ))}
             </Row>
           </>
         )}
