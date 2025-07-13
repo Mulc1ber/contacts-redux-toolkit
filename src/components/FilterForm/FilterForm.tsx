@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { memo } from "react";
 import { FormikConfig } from "formik/dist/types";
-import { useAppSelector } from "src/hooks";
+import { useGetGroupsQuery } from "src/redux/contacts";
 
 export interface FilterFormValues {
   name: string;
@@ -11,7 +11,7 @@ export interface FilterFormValues {
 
 export const FilterForm = memo<FormikConfig<Partial<FilterFormValues>>>(
   ({ onSubmit, initialValues = {} }) => {
-    const { groups, loading } = useAppSelector((state) => state.contacts);
+    const { data: groups = [], isLoading: groupsLoading } = useGetGroupsQuery();
 
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -26,7 +26,7 @@ export const FilterForm = memo<FormikConfig<Partial<FilterFormValues>>>(
                     onChange={handleChange}
                     placeholder="name"
                     aria-label="name"
-                    disabled={loading}
+                    disabled={groupsLoading}
                   />
                 </InputGroup>
               </Col>
@@ -36,7 +36,7 @@ export const FilterForm = memo<FormikConfig<Partial<FilterFormValues>>>(
                   name={"groupId"}
                   aria-label="Поиск по группе"
                   onChange={handleChange}
-                  disabled={loading}
+                  disabled={groupsLoading}
                 >
                   <option>Open this select menu</option>
                   {groups.map((groupContacts) => (

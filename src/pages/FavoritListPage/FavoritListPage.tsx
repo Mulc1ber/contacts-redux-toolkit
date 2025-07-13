@@ -1,12 +1,13 @@
 import { memo } from "react";
 import { Col, Row } from "react-bootstrap";
 import { ContactCard, Loader } from "src/components";
-import { useAppSelector } from "src/hooks";
+import { useGetContactsQuery, useGetFavoritesQuery } from "src/redux/contacts";
 
 export const FavoritListPage = memo(() => {
-  const { contacts, favorites, loading } = useAppSelector(
-    (state) => state.contacts
-  );
+  const { data: contacts = [], isLoading: contactsLoading } =
+    useGetContactsQuery();
+  const { data: favorites = [], isLoading: favoritesLoading } =
+    useGetFavoritesQuery();
 
   const favoriteContacts = contacts.filter((contact) =>
     favorites.includes(contact.id)
@@ -14,7 +15,7 @@ export const FavoritListPage = memo(() => {
 
   return (
     <Row xxl={4} className="g-4">
-      {loading ? (
+      {contactsLoading || favoritesLoading ? (
         <Loader />
       ) : (
         <>

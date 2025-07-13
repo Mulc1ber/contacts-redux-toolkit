@@ -2,17 +2,19 @@ import { FC } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { ContactCard, Empty, Loader } from "src/components";
-import { useAppSelector } from "src/hooks";
+import { useGetContactsQuery } from "src/redux/contacts";
 
 export const ContactPage: FC = () => {
   const { contactId } = useParams<{ contactId: string }>();
-  const { contacts, loading } = useAppSelector((state) => state.contacts);
+
+  const { data: contacts = [], isLoading: contactsLoading } =
+    useGetContactsQuery();
 
   const contact = contacts.find(({ id }) => id === contactId);
 
   return (
     <Row xxl={3}>
-      {loading ? (
+      {contactsLoading ? (
         <Loader />
       ) : (
         <>
